@@ -3,6 +3,7 @@ package faisalkhalid.weatherappandroid.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.CardView;
@@ -26,6 +27,8 @@ import faisalkhalid.weatherappandroid.R;
 import faisalkhalid.weatherappandroid.models.Weather;
 import faisalkhalid.weatherappandroid.models.WeatherForecast;
 import faisalkhalid.weatherappandroid.models.WeatherLocation;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 /**
@@ -65,9 +68,19 @@ public class WeatherListAdaptor extends RecyclerView.Adapter<WeatherListAdaptor.
                 .into(holder.image);
 
 
+        SharedPreferences sharedPref = mContext.getSharedPreferences("Preference",MODE_PRIVATE);
+        String unit = sharedPref.getString("unit","-1");
+        if (unit.contentEquals("F")){
+            holder.temp.setText(forecast.get(position).temp+".F");
+        }
+        else {
+            holder.temp.setText(WeatherForecast.inCelcius(forecast.get(position).temp)+".C");
+
+        }
+
+
         holder.day.setText(forecast.get(position).day+", "+forecast.get(position).date);
         holder.text.setText(forecast.get(position).text);
-        holder.temp.setText(forecast.get(position).temp);
 
 
 

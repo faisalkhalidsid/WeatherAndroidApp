@@ -24,8 +24,8 @@ public class WeatherForecast {
 
     }
 
-    static String  inCelcius(String temp) {
-        return String.valueOf( (Double.parseDouble(temp) - 31) * (0.5556));
+  public   static String  inCelcius(String temp) {
+        return String.valueOf( (int)(( Double.parseDouble(temp) - 31) * (0.5556)));
 
 
     }
